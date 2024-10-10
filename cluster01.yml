@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"short-link-cluster-ip","namespace":"default"},"spec":{"ports":[{"port":80,"protocol":"TCP"}],"selector":{"components":"front"},"type":"ClusterIP"}}
+  creationTimestamp: "2024-09-30T15:37:46Z"
+  name: short-link-cluster-ip
+  namespace: default
+  resourceVersion: "193804"
+  uid: 0b35e76f-8882-42fd-ae88-84e3a6a20287
+spec:
+  clusterIP: 10.233.31.187
+  clusterIPs:
+  - 10.233.31.187
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    components: front
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -20,5 +20,5 @@ spec:
       - name: client
         image: bazdoc/web_cli_go:1.0
         command: ["./app"]
-        args: ["-url", "http://10.233.105.154:8080", "-interval", "3"]
+        args: ["-url", "http://server-svc.ns01.svc.cluster.local:8080", "-interval", "3"]
 

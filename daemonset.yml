@@ -1,12 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ds01
+
+---
+
 apiVersion: apps/v1
-kind: Deployment
-metadata: 
-  name: web-on-go
-  namespace: ns01
+kind: DaemonSet
+metadata:
+  name: web-app-go-daemon-set
+  namespace: ds01
+  labels:
+    app: webservgo01
 spec:
-  strategy:
-    type: Recriate
-  replicas: 3
   selector:
     matchLabels:
       app: webservgo01
@@ -16,9 +22,8 @@ spec:
         app: webservgo01
     spec:
       containers:
-      - name: servergo
+      - name: servergo-ds01
         image: bazdoc/web_on_go:1.1
         ports:
           - containerPort: 8080
             name: web01
-

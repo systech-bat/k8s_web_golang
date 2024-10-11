@@ -1,0 +1,24 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: webclient01
+  namespace: ns01
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webclient01
+  template:
+    metadata:
+      labels:
+        app: webclient01
+    spec:
+      containers:
+      - name: client
+        image: bazdoc/web_cli_go:1.0
+        command: ["./app"]
+        args: ["-url", "http://10.233.105.154:8080", "-interval", "3"]
+

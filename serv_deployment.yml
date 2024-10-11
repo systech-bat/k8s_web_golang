@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: web-on-go
+  namespace: ns01
+spec:
+  strategy:
+    type: Recreate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webservgo01
+  template:
+    metadata:
+      labels:
+        app: webservgo01
+    spec:
+      containers:
+      - name: servergo
+        image: bazdoc/web_on_go:1.1
+        ports:
+          - containerPort: 8080
+            name: web01

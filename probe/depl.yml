@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: probes
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-on-go
+  namespace: probes
+spec:
+  strategy: 
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-on-go
+  template:
+    metadata:
+      labels:
+        app: web-on-go
+    spec:
+      containers:
+      - name: server
+        image: bazdoc/web_on_go:1.1
+        ports:
+        - containerPort: 8080
+          name: web
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: probes
+  name: go-http-server
+spec:
+  selector:
+    app: web-on-go
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

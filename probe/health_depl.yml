@@ -25,7 +25,7 @@ spec:
         - containerPort: 8086
           name: healthchecks        
         command: ["./app"]
-        args: ["-url", "http://go-http-server:8080/cakes", "-wait", "600"]            
+        args: ["-url", "http://web-on-go:8080/cakes", "-wait", "600"]            
         readinessProbe:
           httpGet:
             path: /ready

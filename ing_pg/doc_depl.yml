@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: doc
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: documentation
+  namespace: doc
+spec:
+  strategy: 
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: documentation
+  template:
+    metadata:
+      labels:
+        app: documentation
+    spec:
+      containers:
+      - name: server
+        image: bazdoc/front_ing:1.0
+        ports:
+        - containerPort: 3000
+          name: web
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: doc
+  name: documentation-svc
+spec:
+  selector:
+    app: documentation
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 3000
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: documentation
+  namespace: doc
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: docs.test
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: documentation-svc
+            port:
+              number: 8080    

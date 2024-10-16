@@ -1,6 +1,6 @@
-openssl genrsa -out sec.akj.ru.key 2048
-openssl req -new -key sec.akj.ru.key -out sec.akj.ru.csr -config cert.conf
-openssl x509 -req -days 365 -in sec.akj.ru.csr -signkey sec.akj.ru.key -out sec.akj.ru.crt -extfile  cert.conf
+openssl genrsa -out secret.test.key 2048
+openssl req -new -key secret.test.key -out secret.test.csr -config cert.conf
+openssl x509 -req -days 365 -in secret.test.csr -signkey secret.test.key -out secret.test.crt -extfile  cert.conf
 
-cat sec.akj.ru.key | base64 | tr -d '\n'
-cat sec.akj.ru.crt | base64 | tr -d '\n'
+cat secret.test.key | base64 | tr -d '\n'
+cat secret.test.crt | base64 | tr -d '\n'

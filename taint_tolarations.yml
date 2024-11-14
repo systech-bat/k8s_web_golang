@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: t-t
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taint-deploy
+  labels:
+    env: test
+  namespace: t-t
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      test: taint
+  template:
+    metadata:
+      labels:
+        test: taint
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+        - name: servergo
+          image: bazdoc/web_on_go:1.1
+      tolerations:
+        - key: "taint"
+          operator: "Equal"
+          value: "test"
+          effect: "NoSchedule"

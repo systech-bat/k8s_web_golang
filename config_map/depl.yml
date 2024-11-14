@@ -11,9 +11,10 @@ metadata:
   name: go-file-reader
   namespace: conf-map
 spec:
-  strategy: 
+  strategy:
     type: RollingUpdate
-  replicas: 1
+  replicas: 2
+  nodeName: worker2
   selector:
     matchLabels:
       app: go-file-reader

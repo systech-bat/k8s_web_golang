@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Namespace
+metadata: 
+ name: test
+
+---
+apiVersion: v1
+kind: Pod
+metadata: 
+ name: pv-pod
+ namespace: test
+spec:
+ containers:
+ - name: pv-pod
+   image: nginx
+   volumeMounts: 
+    - mountPath: /pv 
+      name: pv01
+ 
+ volumes: 
+ - name: pv01
+   hostPath: 
+     path: /pv
+     type: Directory 

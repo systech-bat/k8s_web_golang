@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns01
+
+---
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+ name: ns-quota
+ namespace: ns01
+
+spec:
+  hard:
+    pods: "50"
+    requests.cpu: "2"
+    requests.memory: 2Gi
+    limits.cpu: "10"
+    limits.memory: 4Gi
+
